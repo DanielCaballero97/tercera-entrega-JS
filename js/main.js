@@ -24,32 +24,32 @@ function crearCard(galeriaItems, index) {
     card.className = "card";
     card.id = "card";
 
-    const nombre = document.createElement("p");
+    const nombre = document.createElement("h3");
     nombre.className = "nombre";
     nombre.id = "nombre";
     nombre.innerText =galeriaItems.nombre;
 
-    const clase = document.createElement("p");
+    const clase = document.createElement("h4");
     clase.className = "clase";
     clase.id = "clase";
     clase.innerText = galeriaItems.clase;
 
-    const peso = document.createElement("p");
+    const peso = document.createElement("h4");
     peso.className = "peso";
     peso.id = "peso";
     peso.innerText = galeriaItems.peso;
 
-    const arma = document.createElement("p");
+    const arma = document.createElement("h4");
     arma.className = "arma";
     arma.id = "arma";
     arma.innerText = galeriaItems.arma;
 
-    const armadura = document.createElement("p");
+    const armadura = document.createElement("h4");
     armadura.className = "armadura";
     armadura.id = "armadura";
     armadura.innerText = galeriaItems.armadura;
 
-    const rango = document.createElement("p");
+    const rango = document.createElement("h4");
     rango.className = "rango";
     rango.id = "rango";
     rango.innerText = galeriaItems.rango;
@@ -77,11 +77,11 @@ function crearCard(galeriaItems, index) {
 }
 
 function borrarPersonaje(){
+    container.innerHTML = "";
     if(localStorage.getItem("Personaje")){
         localStorage.clear();
         alert('personaje borrado exitosamente');
     }else{
-        localStorage.clear();
         alert('no hay nada que borrar O_o');
     }
 }
@@ -107,7 +107,8 @@ function seleccionPersonaje(){
     })};
 
 function crearPersonaje(){
-    container.innerHTML = "";
+    if(container.innerHTML)
+        container.innerHTML = "";
     if(localStorage.getItem("Personaje")){
         alert('ya tenes un personaje creado :( , borralo para seleccionar otro ')
     }else{
@@ -117,8 +118,9 @@ function crearPersonaje(){
 }
 
 function mostrarPersonaje(perso){
+    container.innerHTML = "";
     if(localStorage.getItem("Personaje")){
-       crearCard(perso , 0)
+        crearCard(perso[0] , 0)
     }else{
         alert('no tenes un personaje creado che :/ ')
     }
@@ -142,5 +144,3 @@ boton3.onclick = () => mostrarPersonaje(perso);
 botones.appendChild(boton3);
 botones.appendChild(boton1);
 botones.appendChild(boton2);
-
-console.log("gol")
