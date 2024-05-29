@@ -5,6 +5,13 @@
     padding: 20px;
 }
 
+.Personaje {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 10px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -24,4 +31,12 @@
 
 .navbar{
     background-color: rgb(107, 107, 107);
+}
+
+.botones{
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(84, 84, 84);
+    padding: 5px;
+    height: 40px;
 }

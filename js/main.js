@@ -1,35 +1,146 @@
 
-class item {
-    constructor (id, nombre , cantidad, peso ){
-        this.id = id;
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.peso = peso;
-}
-}
-
 
 const botones = document.getElementById("botones");
-const container = document.getElementById("inventario");
+const container = document.getElementById("Personaje");
 
-let inventario;
+const almacenPersonaje = []
 
-if(localStorage.getItem("inventario")){
-    inventario = JSON.parse(localStorage.getItem("inventario"));
+
+let perso;
+
+if(localStorage.getItem("Personaje")){
+    perso = JSON.parse(localStorage.getItem("Personaje"));
 }else{
-    inventario = [];
+    perso = [];
 };
 
+function crearCard(galeriaItems, index) {
 
-function agregarItem(){
-    const newItem = new item
+    if (index === 0) {
+        Personaje.innerHTML = "";
+    };
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = "card";
+
+    const nombre = document.createElement("p");
+    nombre.className = "nombre";
+    nombre.id = "nombre";
+    nombre.innerText =galeriaItems.nombre;
+
+    const clase = document.createElement("p");
+    clase.className = "clase";
+    clase.id = "clase";
+    clase.innerText = galeriaItems.clase;
+
+    const peso = document.createElement("p");
+    peso.className = "peso";
+    peso.id = "peso";
+    peso.innerText = galeriaItems.peso;
+
+    const arma = document.createElement("p");
+    arma.className = "arma";
+    arma.id = "arma";
+    arma.innerText = galeriaItems.arma;
+
+    const armadura = document.createElement("p");
+    armadura.className = "armadura";
+    armadura.id = "armadura";
+    armadura.innerText = galeriaItems.armadura;
+
+    const rango = document.createElement("p");
+    rango.className = "rango";
+    rango.id = "rango";
+    rango.innerText = galeriaItems.rango;
+
+    const imagen = document.createElement("img");
+    imagen.className = "imagen";
+    imagen.id = "imagen";
+    imagen.src = galeriaItems.imagen;
+
+    const button = document.createElement("button");
+    button.innerText = "Seleccionar";
+    button.className = "Selecion";
+    button.onclick = () => guardarPersonaje(galeriaItems.id);
+
+    card.appendChild(nombre);
+    card.appendChild(clase);
+    card.appendChild(peso);
+    card.appendChild(arma);
+    card.appendChild(armadura);
+    card.appendChild(rango);
+    card.appendChild(imagen);
+    card.appendChild(button);
+
+    container.appendChild(card);
+}
+
+function borrarPersonaje(){
+    if(localStorage.getItem("Personaje")){
+        localStorage.clear();
+        alert('personaje borrado exitosamente');
+    }else{
+        localStorage.clear();
+        alert('no hay nada que borrar O_o');
+    }
+}
+
+function guardarPersonaje(id){
+    if(localStorage.getItem("Personaje")){
+        alert('ya tenes un personaje creado :( , borralo para seleccionar otro ')
+    }else{
+        const nuevoPJ = galeriaItems.find(el => el.id === id);
+        almacenPersonaje.push(nuevoPJ);
+        localStorage.setItem("Personaje", JSON.stringify(almacenPersonaje));
+        alert('personaje creado con exito :D');
+        container.innerHTML = "";}
+
+}
+
+function seleccionPersonaje(){
+    container.innerHTML = "";
+    const claseElegida = galeriaItems.slice(9, 13);
+    claseElegida.forEach((el, index) => {
+        crearCard(el, index);
+
+    })};
+
+function crearPersonaje(){
+    container.innerHTML = "";
+    if(localStorage.getItem("Personaje")){
+        alert('ya tenes un personaje creado :( , borralo para seleccionar otro ')
+    }else{
+        seleccionPersonaje();
+    };
+
+}
+
+function mostrarPersonaje(perso){
+    if(localStorage.getItem("Personaje")){
+       crearCard(perso , 0)
+    }else{
+        alert('no tenes un personaje creado che :/ ')
+    }
 }
 
 
 const boton1 = document.createElement("button");
+const boton2 = document.createElement("button");
+const boton3 = document.createElement("button");
 
-boton1.innerText = "Agregar item nuevo";
 
-boton1.onclick = () => agregarItem();
+boton1.innerText = "Crear Personaje";
+boton2.innerText = "Borrar Personaje";
+boton3.innerText = "Mostrar Personaje";
 
+
+boton1.onclick = () => crearPersonaje();
+boton2.onclick = () => borrarPersonaje();
+boton3.onclick = () => mostrarPersonaje(perso);
+
+botones.appendChild(boton3);
 botones.appendChild(boton1);
+botones.appendChild(boton2);
+
+console.log("gol")
